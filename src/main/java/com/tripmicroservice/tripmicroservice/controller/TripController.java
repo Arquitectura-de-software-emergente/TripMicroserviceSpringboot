@@ -33,9 +33,23 @@ public class TripController {
     @GetMapping("/trip")
     public ResponseEntity<List<TripResponse>> getAllTrip() {
         logger.info("Received request to get all trips");
+        // aquu comienza pidiendo las trips y se va al trip response quem etraera all trp del service
         List<TripResponse> trips = tripService.getAllTrip();
         logger.info("Retrieved trips: {}", trips);
         return new ResponseEntity<>(trips, HttpStatus.OK);
+    }
+
+    @GetMapping("/trip/{id}")
+    public ResponseEntity<TripResponse> getTripById(@PathVariable int id) {
+        logger.info("Received request to get trip by id: {}", id);
+        try {
+            TripResponse tripResponse = tripService.getServiceByTripId(id);
+            logger.info("Retrieved trip for id: {}", id);
+            return new ResponseEntity<>(tripResponse, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            logger.error("Trip not found for id: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/trip/{id}")
@@ -67,16 +81,5 @@ public class TripController {
         return new ResponseEntity<>(trips, HttpStatus.OK);
     }
 
-    @GetMapping("/trip/{id}")
-    public ResponseEntity<TripResponse> getTripById(@PathVariable int id) {
-        logger.info("Received request to get trip by id: {}", id);
-        try {
-            TripResponse tripResponse = tripService.getServiceByTripId(id);
-            logger.info("Retrieved trip for id: {}", id);
-            return new ResponseEntity<>(tripResponse, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            logger.error("Trip not found for id: {}", id, e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+
 }

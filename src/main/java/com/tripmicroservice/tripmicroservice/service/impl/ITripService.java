@@ -1,7 +1,9 @@
 package com.tripmicroservice.tripmicroservice.service.impl;
 
+import com.tripmicroservice.tripmicroservice.client.RatingClient;
 import com.tripmicroservice.tripmicroservice.client.ReservationClient;
 import com.tripmicroservice.tripmicroservice.client.ServiceClient;
+import com.tripmicroservice.tripmicroservice.dto.RatingDto;
 import com.tripmicroservice.tripmicroservice.dto.ReservationDto;
 import com.tripmicroservice.tripmicroservice.dto.ServicesDto;
 import com.tripmicroservice.tripmicroservice.entities.Trip;
@@ -29,7 +31,8 @@ public class ITripService implements TripService {
 
     @Autowired
     private ReservationClient reservationClient;
-
+    @Autowired
+    private RatingClient ratingClient;
     @Override
     public Trip createTrip(Trip trip) {
         logger.info("Creating trip: {}", trip);
@@ -47,14 +50,12 @@ public class ITripService implements TripService {
         List<TripResponse> responses = new ArrayList<>();
         for (Trip trip : trips) {
             logger.info("Processing trip: {}", trip);
+            // pasamos por qui y me trae el trip correccto
+            // ye ntramso al ITripService
             List<ReservationDto> reservations = reservationClient.getReservationsByTripId(trip.getId());
-            if (reservations == null) {
-                logger.warn("Reservations not found for trip id: {}", trip.getId());
-                reservations = new ArrayList<>();
-            } else {
-                logger.info("Retrieved reservations for trip id: {}", trip.getId());
-            }
+
             List<ServicesDto> servicesDtos = serviceClient.finAllServiceByTripId(trip.getId());
+            List<RatingDto> ratingsDtos =  ratingClient.getRatingsByTripId(trip.getId());
             TripResponse response = TripResponse.builder()
                     .Id(trip.getId())
                     .Title(trip.getTitle())
@@ -63,6 +64,7 @@ public class ITripService implements TripService {
                     .Difficulty(trip.getDifficulty())
                     .servicesDtoList(servicesDtos)
                     .reservations(reservations)
+                    .ratings(ratingsDtos)
                     .build();
             responses.add(response);
         }
@@ -105,6 +107,8 @@ public class ITripService implements TripService {
         });
         List<ServicesDto> services = serviceClient.finAllServiceByTripId(tripId);
         List<ReservationDto> reservations = reservationClient.getReservationsByTripId(tripId);
+        List<RatingDto> ratings = ratingClient.getRatingsByTripId(tripId);
+
         if (reservations == null) {
             logger.warn("Reservations not found for trip id: {}", tripId);
             reservations = new ArrayList<>();
@@ -117,6 +121,7 @@ public class ITripService implements TripService {
                 .Difficulty(trip.getDifficulty())
                 .servicesDtoList(services)
                 .reservations(reservations)
+                .ratings(ratings)
                 .build();
     }
 }
