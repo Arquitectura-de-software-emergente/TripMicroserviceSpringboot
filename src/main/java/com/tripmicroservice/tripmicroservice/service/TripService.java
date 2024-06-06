@@ -6,13 +6,12 @@ import com.tripmicroservice.tripmicroservice.http.TripResponse;
 import java.util.List;
 
 public interface TripService {
-    public abstract Trip createTrip(Trip _trip);
-    public abstract List<TripResponse> getAllTrip();
-    public abstract void updateTrip(Trip _trip);
-    public abstract void deleteTrip(int _id);
-    public abstract Trip getTripById(int _id);
+    Trip createTrip(Trip trip);
+    List<TripResponse> getAllTrip();
+    void updateTrip(Trip trip);
+    void deleteTrip(int id);
+    Trip getTripById(int id);
 
-    //conexion
-    List<Trip> getTripByAgencyId(int _agencyId);
-     TripResponse getServiceByTripId(int _tripId);
+    List<Trip> getTripByAgencyId(int agencyId);
+    TripResponse getServiceByTripId(int tripId);
 }

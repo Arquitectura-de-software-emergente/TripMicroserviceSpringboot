@@ -1,5 +1,6 @@
 package com.tripmicroservice.tripmicroservice.http;
 
+import com.tripmicroservice.tripmicroservice.dto.ReservationDto;
 import com.tripmicroservice.tripmicroservice.dto.ServicesDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,6 @@ public class TripResponse {
     private String Difficulty;
 
     List<ServicesDto> servicesDtoList;
+    private List<ReservationDto> reservations; // Incluir la lista de reservas
+
 }

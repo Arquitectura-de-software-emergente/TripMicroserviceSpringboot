@@ -15,16 +15,20 @@ import lombok.NoArgsConstructor;
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    @Column(name = "agency_id",nullable = false)
-    private int agencyId;
-    @Column(name = "title",nullable = false)
-    private String Title;
-    @Column(name = "description",nullable = false)
-    private String Description;
-    @Column(name = "duration",nullable = false)
-    private int Duration;
-    @Column(name = "difficulty",nullable = false)
-    private String Difficulty;
+    private int id;
 
+    @Column(name = "agency_id", nullable = false)
+    private int agencyId;
+
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "duration", nullable = false)
+    private int duration;
+
+    @Column(name = "difficulty", nullable = false)
+    private String difficulty;
 }

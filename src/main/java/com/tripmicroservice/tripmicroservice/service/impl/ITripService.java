@@ -1,37 +1,60 @@
 package com.tripmicroservice.tripmicroservice.service.impl;
 
+import com.tripmicroservice.tripmicroservice.client.ReservationClient;
 import com.tripmicroservice.tripmicroservice.client.ServiceClient;
+import com.tripmicroservice.tripmicroservice.dto.ReservationDto;
 import com.tripmicroservice.tripmicroservice.dto.ServicesDto;
 import com.tripmicroservice.tripmicroservice.entities.Trip;
 import com.tripmicroservice.tripmicroservice.http.TripResponse;
 import com.tripmicroservice.tripmicroservice.repository.TripRepository;
 import com.tripmicroservice.tripmicroservice.service.TripService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class ITripService implements TripService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ITripService.class);
+
     @Autowired
-    private TripRepository _tripRepository;
+    private TripRepository tripRepository;
+
     @Autowired
-    private ServiceClient _serviceClient;
+    private ServiceClient serviceClient;
+
+    @Autowired
+    private ReservationClient reservationClient;
+
     @Override
-    public Trip createTrip(Trip _trip) {
-        return _tripRepository.save(_trip);
+    public Trip createTrip(Trip trip) {
+        logger.info("Creating trip: {}", trip);
+        return tripRepository.save(trip);
     }
 
-    public List<Trip> getAll(){
-        return (List<Trip>) _tripRepository.findAll();
+    public List<Trip> getAll() {
+        logger.info("Retrieving all trips");
+        return tripRepository.findAll();
     }
+
     @Override
     public List<TripResponse> getAllTrip() {
-      List<Trip> trips = getAll();
-      List<TripResponse>  responses =  new ArrayList<>();
-      for (Trip trip : trips){
-          List<ServicesDto> servicesDtos = _serviceClient.finAllServiceByTripId(trip.getId());
+        List<Trip> trips = getAll();
+        List<TripResponse> responses = new ArrayList<>();
+        for (Trip trip : trips) {
+            logger.info("Processing trip: {}", trip);
+            List<ReservationDto> reservations = reservationClient.getReservationsByTripId(trip.getId());
+            if (reservations == null) {
+                logger.warn("Reservations not found for trip id: {}", trip.getId());
+                reservations = new ArrayList<>();
+            } else {
+                logger.info("Retrieved reservations for trip id: {}", trip.getId());
+            }
+            List<ServicesDto> servicesDtos = serviceClient.finAllServiceByTripId(trip.getId());
             TripResponse response = TripResponse.builder()
                     .Id(trip.getId())
                     .Title(trip.getTitle())
@@ -39,40 +62,53 @@ public class ITripService implements TripService {
                     .Duration(trip.getDuration())
                     .Difficulty(trip.getDifficulty())
                     .servicesDtoList(servicesDtos)
+                    .reservations(reservations)
                     .build();
-          responses.add(response);
-      }
-      return responses;
-    }
-
-    @Override
-    public void updateTrip(Trip _trip) {
-        _tripRepository.save(_trip);
-    }
-
-    @Override
-    public void deleteTrip(int _id) {
-        _tripRepository.deleteById(_id);
-    }
-
-    @Override
-    public Trip getTripById(int _id) {
-        if(_tripRepository.findById(_id).isPresent()){
-            return _tripRepository.findById(_id).get();
-        }else{
-            throw new RuntimeException("Trip not found");
+            responses.add(response);
         }
-    }
-    @Override
-    public List<Trip> getTripByAgencyId(int _agencyId) {
-        return _tripRepository.findByAgencyId(_agencyId);
+        return responses;
     }
 
     @Override
-    public TripResponse getServiceByTripId(int _tripId) {
-        Trip trip = _tripRepository.findById(_tripId).orElse(new Trip());
-        List<ServicesDto> services = _serviceClient.finAllServiceByTripId(_tripId);
+    public void updateTrip(Trip trip) {
+        logger.info("Updating trip: {}", trip);
+        tripRepository.save(trip);
+    }
 
+    @Override
+    public void deleteTrip(int id) {
+        logger.info("Deleting trip with id: {}", id);
+        tripRepository.deleteById(id);
+    }
+
+    @Override
+    public Trip getTripById(int id) {
+        logger.info("Getting trip by id: {}", id);
+        return tripRepository.findById(id).orElseThrow(() -> {
+            logger.error("Trip not found with id: {}", id);
+            return new RuntimeException("Trip not found");
+        });
+    }
+
+    @Override
+    public List<Trip> getTripByAgencyId(int agencyId) {
+        logger.info("Getting trips by agency id: {}", agencyId);
+        return tripRepository.findByAgencyId(agencyId);
+    }
+
+    @Override
+    public TripResponse getServiceByTripId(int tripId) {
+        logger.info("Getting services and reservations for trip id: {}", tripId);
+        Trip trip = tripRepository.findById(tripId).orElseThrow(() -> {
+            logger.error("Trip not found with id: {}", tripId);
+            return new RuntimeException("Trip not found");
+        });
+        List<ServicesDto> services = serviceClient.finAllServiceByTripId(tripId);
+        List<ReservationDto> reservations = reservationClient.getReservationsByTripId(tripId);
+        if (reservations == null) {
+            logger.warn("Reservations not found for trip id: {}", tripId);
+            reservations = new ArrayList<>();
+        }
         return TripResponse.builder()
                 .Id(trip.getId())
                 .Title(trip.getTitle())
@@ -80,6 +116,7 @@ public class ITripService implements TripService {
                 .Duration(trip.getDuration())
                 .Difficulty(trip.getDifficulty())
                 .servicesDtoList(services)
+                .reservations(reservations)
                 .build();
     }
 }
