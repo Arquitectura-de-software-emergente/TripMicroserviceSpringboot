@@ -14,7 +14,7 @@ public class ServiceClientImpl implements ServiceClient{
 
     @Autowired
     public ServiceClientImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:5279/api").build();
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/service").build();
         System.out.println("webClient: " + webClient);
     }
 
@@ -24,7 +24,7 @@ public class ServiceClientImpl implements ServiceClient{
 
             System.out.println("try: " + tripId);
             return webClient.get()
-                    .uri("/service/service/{tripId}", tripId)
+                    .uri("/service/{tripId}", tripId)
                     .retrieve()
                     .bodyToFlux(ServicesDto.class)
                     .collectList()

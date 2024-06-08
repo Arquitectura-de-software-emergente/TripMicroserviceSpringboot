@@ -20,7 +20,7 @@ public class RatingClient {
 
     @Autowired
     public RatingClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8084/api/v1").build();
+        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/v1/rating").build();
     }
 
     public List<RatingDto> getRatingsByTripId(int tripId) {
@@ -28,7 +28,7 @@ public class RatingClient {
         try {
             logger.info("Fetching ratings for trip id: {}", tripId);
             List<RatingDto> ratings = webClient.get()
-                    .uri("/ratings/by-trip/{tripId}", tripId)
+                    .uri("/by-trip/{tripId}", tripId)
                     .retrieve()
                     .bodyToFlux(RatingDto.class)
                     .collectList()

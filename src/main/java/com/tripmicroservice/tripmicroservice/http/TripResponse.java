@@ -22,7 +22,7 @@ public class TripResponse {
     private int Duration;
     private String Difficulty;
 
-    List<ServicesDto> servicesDtoList;
+    List<ServicesDto> servicesList;
     private List<ReservationDto> reservations; // Incluir la lista de reservas
     private List<RatingDto> ratings; // Incluir la lista de reservas
 

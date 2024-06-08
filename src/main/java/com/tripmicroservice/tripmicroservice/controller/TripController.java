@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/trip")
 public class TripController {
 
     private static final Logger logger = LoggerFactory.getLogger(TripController.class);
@@ -22,7 +22,7 @@ public class TripController {
     @Autowired
     private ITripService tripService;
 
-    @PostMapping("/trip")
+    @PostMapping
     public ResponseEntity<Trip> createTrip(@RequestBody Trip trip) {
         logger.info("Received request to create trip: {}", trip);
         Trip createdTrip = tripService.createTrip(trip);
@@ -30,7 +30,7 @@ public class TripController {
         return new ResponseEntity<>(createdTrip, HttpStatus.CREATED);
     }
 
-    @GetMapping("/trip")
+    @GetMapping
     public ResponseEntity<List<TripResponse>> getAllTrip() {
         logger.info("Received request to get all trips");
         // aquu comienza pidiendo las trips y se va al trip response quem etraera all trp del service
@@ -39,7 +39,7 @@ public class TripController {
         return new ResponseEntity<>(trips, HttpStatus.OK);
     }
 
-    @GetMapping("/trip/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TripResponse> getTripById(@PathVariable int id) {
         logger.info("Received request to get trip by id: {}", id);
         try {
@@ -52,7 +52,7 @@ public class TripController {
         }
     }
 
-    @PutMapping("/trip/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateTrip(@PathVariable("id") int id, @RequestBody Trip trip) {
         logger.info("Received request to update trip with id: {}", id);
         trip.setId(id);
@@ -61,7 +61,7 @@ public class TripController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/trip/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTrip(@PathVariable("id") int id) {
         logger.info("Received request to delete trip with id: {}", id);
         tripService.deleteTrip(id);
@@ -69,7 +69,7 @@ public class TripController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/trip/by-agency/{agencyId}")
+    @GetMapping("/by-agency/{agencyId}")
     public ResponseEntity<List<Trip>> getTripsByAgencyId(@PathVariable int agencyId) {
         logger.info("Received request to get trips by agencyId: {}", agencyId);
         List<Trip> trips = tripService.getTripByAgencyId(agencyId);

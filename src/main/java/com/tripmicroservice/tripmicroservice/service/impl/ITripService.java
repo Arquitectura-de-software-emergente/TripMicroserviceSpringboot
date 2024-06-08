@@ -62,7 +62,7 @@ public class ITripService implements TripService {
                     .Description(trip.getDescription())
                     .Duration(trip.getDuration())
                     .Difficulty(trip.getDifficulty())
-                    .servicesDtoList(servicesDtos)
+                    .servicesList(servicesDtos)
                     .reservations(reservations)
                     .ratings(ratingsDtos)
                     .build();
@@ -119,7 +119,7 @@ public class ITripService implements TripService {
                 .Description(trip.getDescription())
                 .Duration(trip.getDuration())
                 .Difficulty(trip.getDifficulty())
-                .servicesDtoList(services)
+                .servicesList(services)
                 .reservations(reservations)
                 .ratings(ratings)
                 .build();
