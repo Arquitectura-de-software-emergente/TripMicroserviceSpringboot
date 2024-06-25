@@ -21,6 +21,14 @@ public class TripResponse {
     private String Description;
     private int Duration;
     private String Difficulty;
+    private String fechaRegistro;
+    private double precio;
+    private String photo1;
+    private String photo2;
+    private String photo3;
+    private String photo4;
+    private String photo5;
+
 
     List<ServicesDto> servicesList;
     private List<ReservationDto> reservations; // Incluir la lista de reservas

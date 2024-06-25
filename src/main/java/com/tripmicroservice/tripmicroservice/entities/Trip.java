@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -31,4 +33,35 @@ public class Trip {
 
     @Column(name = "difficulty", nullable = false)
     private String difficulty;
+
+
+    @Column(name = "lugar")
+    private String lugar;
+
+
+    @Column(name = "telefono")
+    private String telefono;
+
+    @Column(name = "fecha_registro")
+    private String fechaRegistro;
+
+    @Column(name = "precio")
+    private double precio;
+
+    @Column(name = "photo1")
+    private String photo1;
+
+    @Column(name = "photo2")
+    private String photo2;
+
+    @Column(name = "photo3")
+    private String photo3;
+
+    @Column(name = "photo4")
+    private String photo4;
+
+    @Column(name = "photo5")
+    private String photo5;
+
+;
 }
