@@ -1,6 +1,6 @@
-package com.tripmicroservice.tripmicroservice.client;
+package com.tripmicroservice.tripmicroservice.api.client;
 
-import com.tripmicroservice.tripmicroservice.dto.ServicesDto;
+import com.tripmicroservice.tripmicroservice.interfaces.dto.ServicesDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

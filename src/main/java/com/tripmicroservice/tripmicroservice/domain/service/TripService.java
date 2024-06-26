@@ -1,7 +1,7 @@
-package com.tripmicroservice.tripmicroservice.service;
+package com.tripmicroservice.tripmicroservice.domain.service;
 
-import com.tripmicroservice.tripmicroservice.entities.Trip;
-import com.tripmicroservice.tripmicroservice.http.TripResponse;
+import com.tripmicroservice.tripmicroservice.domain.model.Trip;
+import com.tripmicroservice.tripmicroservice.interfaces.dto.TripResponse;
 
 import java.util.List;
 

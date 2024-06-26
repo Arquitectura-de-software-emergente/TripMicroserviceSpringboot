@@ -1,4 +1,4 @@
-package com.tripmicroservice.tripmicroservice.dto;
+package com.tripmicroservice.tripmicroservice.interfaces.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

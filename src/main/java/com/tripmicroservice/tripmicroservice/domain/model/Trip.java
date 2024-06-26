@@ -1,4 +1,4 @@
-package com.tripmicroservice.tripmicroservice.entities;
+package com.tripmicroservice.tripmicroservice.domain.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
-package com.tripmicroservice.tripmicroservice.controller;
+package com.tripmicroservice.tripmicroservice.domain.rest;
 
-import com.tripmicroservice.tripmicroservice.entities.Trip;
-import com.tripmicroservice.tripmicroservice.http.TripResponse;
-import com.tripmicroservice.tripmicroservice.service.impl.ITripService;
+import com.tripmicroservice.tripmicroservice.domain.model.Trip;
+import com.tripmicroservice.tripmicroservice.interfaces.dto.TripResponse;
+import com.tripmicroservice.tripmicroservice.interfaces.service.ITripService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

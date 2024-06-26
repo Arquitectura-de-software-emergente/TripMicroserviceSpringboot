@@ -1,14 +1,13 @@
-package com.tripmicroservice.tripmicroservice.http;
+package com.tripmicroservice.tripmicroservice.interfaces.dto;
 
-import com.tripmicroservice.tripmicroservice.dto.RatingDto;
-import com.tripmicroservice.tripmicroservice.dto.ReservationDto;
-import com.tripmicroservice.tripmicroservice.dto.ServicesDto;
+import com.tripmicroservice.tripmicroservice.interfaces.dto.RatingDto;
+import com.tripmicroservice.tripmicroservice.interfaces.dto.ReservationDto;
+import com.tripmicroservice.tripmicroservice.interfaces.dto.ServicesDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.security.Provider;
 import java.util.List;
 
 @Data
