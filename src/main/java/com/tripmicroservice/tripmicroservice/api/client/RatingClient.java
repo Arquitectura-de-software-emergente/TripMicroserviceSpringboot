@@ -20,7 +20,7 @@ public class RatingClient {
 
     @Autowired
     public RatingClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8080/api/v1/rating").build();
+        this.webClient = webClientBuilder.baseUrl("https://ratingmicroservice.onrender.com/api/v1/rating").build();
     }
 
     public List<RatingDto> getRatingsByTripId(int tripId) {
