@@ -1,0 +1,14 @@
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\api\client\RatingClient.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\api\client\ReservationClient.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\api\client\ServiceClient.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\api\client\ServiceClientImpl.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\domain\model\Trip.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\domain\rest\TripController.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\domain\service\TripService.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\infrastructure\persistence\TripRepository.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\interfaces\dto\RatingDto.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\interfaces\dto\ReservationDto.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\interfaces\dto\ServicesDto.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\interfaces\dto\TripResponse.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\interfaces\service\ITripService.java
+D:\2024 1\Uni\Arquitectura\Repositorios\TripMicroserviceSpringboot\src\main\java\com\tripmicroservice\tripmicroservice\TripmicroserviceApplication.java
